@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="img/logo.png">
+<title>QH SERVIS S.A.C.</title>
+<meta name="description" content="QH SERVIS S.A.C. — Ingeniería, fabricación y proyectos metalmecánicos: estructuras metálicas, techos para canchas, puertas tipo madera, mobiliario metálico, soldadura y montaje industrial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,700;1,800;1,900&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: identidad QH SERVIS — bandas azul marino con cortes diagonales naranja, hojas claras para servicios, cotas técnicas en mono */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#0F1E36; --muted:#506079; --line:#D5DCE6;
+  --navy:#12233F; --navy-2:#1C3157; --on-navy:#EEF2F8; --on-navy-muted:#AEBBD0;
+  --orange:#EE7419; --orange-text:#B9540A; --star:#F08A24;
+  --wood:#8A5A33; --wood-2:#B07A47; --wood-3:#5E3B20; --metal:#8E9AA6; --metal-2:#C2CAD3;
+  --wa:#1F9D55; --on-wa:#FFFFFF;
+  --f-display:"Montserrat","Arial Black",Arial,sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1324; --surface:#111D33; --ink:#E9EEF6; --muted:#9BA9BF; --line:#22324E;
+  --navy:#0C1930; --navy-2:#1A2C4C; --on-navy:#EEF2F8; --on-navy-muted:#A3B1C8;
+  --orange:#F5862F; --orange-text:#F7954A; --star:#F7954A;
+  --wood:#9C6A3E; --wood-2:#BE8954; --wood-3:#6B4426; --metal:#74808C; --metal-2:#A6AFB9;
+  --wa:#25B062; --on-wa:#06140B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1324; --surface:#111D33; --ink:#E9EEF6; --muted:#9BA9BF; --line:#22324E;
+  --navy:#0C1930; --navy-2:#1A2C4C; --on-navy:#EEF2F8; --on-navy-muted:#A3B1C8;
+  --orange:#F5862F; --orange-text:#F7954A; --star:#F7954A;
+  --wood:#9C6A3E; --wood-2:#BE8954; --wood-3:#6B4426; --metal:#74808C; --metal-2:#A6AFB9;
+  --wa:#25B062; --on-wa:#06140B; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-style:italic;font-weight:800;text-transform:uppercase;line-height:1;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.eyebrow{display:inline-block;font:500 12px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--orange-text)}
+.on-navy .eyebrow{color:var(--orange)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;cursor:pointer;text-decoration:none;font:600 15px/1 var(--f-body);padding:15px 22px;border-radius:999px;transition:transform .15s ease,filter .15s ease}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.07)}
+.btn-wa{background:var(--wa);color:var(--on-wa)}
+.btn-line{background:transparent;color:var(--on-navy);box-shadow:inset 0 0 0 1.5px var(--on-navy-muted)}
+.btn-sm{padding:10px 16px;font-size:14px}
+.ico{width:20px;height:20px;flex:none}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:3px solid var(--orange)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.brand img{width:52px;height:auto}
+.brand .name{font:900 italic 22px/1 var(--f-display);color:var(--ink);white-space:nowrap}
+.brand .name span{color:var(--orange)}
+.brand small{display:block;font:500 9.5px/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.navlinks{display:flex;gap:22px;font-size:14px;font-weight:500}
+.navlinks a{text-decoration:none;color:var(--muted)}
+.navlinks a:hover{color:var(--ink)}
+@media (max-width:900px){.navlinks{display:none}}
+@media (max-width:420px){.brand small{display:none}.brand .name{font-size:18px}.brand img{width:42px}}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:var(--on-navy);overflow:hidden;isolation:isolate}
+.hero::after{content:"";position:absolute;right:0;bottom:0;width:38%;height:10px;background:var(--orange);clip-path:polygon(4% 0,100% 0,100% 100%,0 100%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;min-height:0}
+.hero-copy{padding-block:64px 56px;display:grid;gap:22px;align-content:center;position:relative;z-index:3}
+.hero h1{font-size:clamp(40px,6.4vw,78px);font-weight:900}
+.hero h1 em{display:block;font-style:italic;color:var(--orange)}
+.hero .lead{max-width:50ch;color:var(--on-navy-muted);font-size:18px;margin:0}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.sectors{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.sectors span{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 11px;border:1px solid var(--navy-2);border-radius:3px;color:var(--on-navy-muted)}
+.hero-photo{position:relative;min-height:440px}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
+.hero-photo .badge{position:absolute;right:18px;bottom:28px;z-index:3;background:rgba(10,20,40,.78);border-left:3px solid var(--orange);padding:10px 14px;font:500 12px/1.4 var(--f-mono);color:#EEF2F8;letter-spacing:.04em}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo{min-height:240px;order:-1}
+  .hero-photo img{clip-path:polygon(0 0,100% 0,100% 88%,0 100%)}
+  .hero-copy{padding-block:28px 48px}
+}
+
+/* sections */
+section{padding-block:84px}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:end;margin-bottom:40px}
+.sec-head h2{font-size:clamp(34px,5vw,58px);margin-top:10px}
+.sec-head p{color:var(--muted);max-width:52ch;margin:0}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr}section{padding-block:56px}}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:1000px){.services{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.services{grid-template-columns:1fr}}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;min-width:0}
+.svc figure{margin:0;aspect-ratio:16/10;max-width:100%;background:var(--navy);position:relative;overflow:hidden}
+.svc figure img,.svc figure svg{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.svc:hover figure img{transform:scale(1.04)}
+.svc .num{position:absolute;left:0;top:0;background:var(--orange);color:#fff;font:900 italic 15px/1 var(--f-display);padding:9px 14px 9px 12px;clip-path:polygon(0 0,100% 0,86% 100%,0 100%)}
+.svc .body{padding:22px 22px 24px;display:grid;gap:12px;grid-template-rows:auto auto 1fr auto}
+.svc h3{font-size:24px}
+.svc p{margin:0;color:var(--muted);font-size:15px}
+.svc ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:14.5px}
+.svc li{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:start}
+.svc li::before{content:"";width:8px;height:8px;margin-top:7px;background:var(--orange);transform:skewX(-14deg)}
+.svc .btn{justify-self:start;margin-top:6px}
+
+/* door */
+.door-sec{background:var(--surface);border-block:1px solid var(--line)}
+.door-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media (max-width:860px){.door-grid{grid-template-columns:1fr;gap:32px}}
+.door-copy h2{font-size:clamp(36px,5.4vw,64px);margin:10px 0 18px}
+.door-copy p{color:var(--muted);max-width:48ch;margin:0}
+.door-copy ol{padding:0;margin:24px 0 26px;list-style:none;display:grid;gap:12px;counter-reset:s}
+.door-copy li{display:grid;grid-template-columns:34px 1fr;gap:10px;counter-increment:s}
+.door-copy li::before{content:counter(s);font:900 italic 22px/1.1 var(--f-display);color:var(--orange)}
+.door-stage{display:grid;gap:14px;justify-items:center}
+.door{--p:55%;position:relative;width:min(100%,330px);aspect-ratio:9/16;border:10px solid var(--navy);border-bottom-width:6px;border-radius:3px;background:var(--navy)}
+.door .layer{position:absolute;inset:0;display:grid;grid-template-rows:repeat(6,1fr);gap:4%;padding:7% 8%}
+.door .raw{background:linear-gradient(100deg,var(--metal) 0%,var(--metal-2) 40%,var(--metal) 60%,var(--metal-2) 100%)}
+.door .raw i{background:linear-gradient(170deg,var(--metal-2),var(--metal));box-shadow:inset 0 -2px 0 rgba(0,0,0,.2)}
+.door .wood{clip-path:inset(0 calc(100% - var(--p)) 0 0);background:#1a1a1a}
+.door .wood i{background:repeating-linear-gradient(2deg,var(--wood) 0 6px,var(--wood-2) 6px 9px,var(--wood) 9px 17px,var(--wood-3) 17px 18px,var(--wood-2) 18px 26px)}
+.door .seam{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1px;background:var(--orange);box-shadow:0 0 18px 4px rgba(238,116,25,.7)}
+.door .handle{position:absolute;right:12%;top:30%;width:4%;height:38%;border-radius:3px;background:linear-gradient(90deg,#9aa3ab,#e6eaee,#9aa3ab)}
+.door-labels{width:min(100%,330px);display:flex;justify-content:space-between;color:var(--muted);font:500 12px/1 var(--f-mono)}
+.range{width:min(100%,330px);accent-color:var(--orange)}
+
+/* portfolio */
+.port{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.work{position:relative;display:block;border-radius:6px;overflow:hidden;background:var(--navy);min-height:260px;text-decoration:none;color:#F2F5FA}
+.work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.work:hover img{transform:scale(1.04)}
+.work .cap{position:absolute;inset:auto 0 0 0;padding:44px 18px 16px;background:linear-gradient(transparent,rgba(8,16,32,.9));display:grid;gap:6px}
+.work .cap b{font:800 italic 21px/1.1 var(--f-display);text-transform:uppercase}
+.work .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 11.5px/1.3 var(--f-mono);letter-spacing:.05em;color:#C8D2E2}
+.work .go{position:absolute;right:14px;top:14px;background:var(--wa);color:var(--on-wa);border-radius:999px;padding:8px 12px;font:600 12.5px/1 var(--f-body);display:flex;gap:6px;align-items:center;opacity:.95}
+.w1{grid-column:span 7;grid-row:span 2;min-height:520px}
+.w2{grid-column:span 5}
+.w3{grid-column:span 5}
+.w4{grid-column:span 6;min-height:320px}
+.w5{grid-column:span 6;min-height:320px}
+@media (max-width:860px){.port{grid-template-columns:1fr 1fr}.w1,.w2,.w3,.w4,.w5{grid-column:span 2;grid-row:auto;min-height:280px}}
+
+/* team */
+.team{background:var(--navy);color:var(--on-navy)}
+.team-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+@media (max-width:860px){.team-grid{grid-template-columns:1fr;gap:28px}}
+.team-photo{border-radius:6px;overflow:hidden;aspect-ratio:1500/590;max-width:100%}
+.team-photo img{width:100%;height:100%;object-fit:cover}
+.team h2{font-size:clamp(34px,5vw,56px);margin:10px 0 14px}
+.team h2 em{font-style:italic;color:var(--orange)}
+.team p{color:var(--on-navy-muted);margin:0 0 22px;max-width:46ch}
+.pillars{list-style:none;padding:0;margin:0;display:grid;gap:0;border-top:1px solid var(--navy-2)}
+.pillars li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--navy-2);font-weight:600}
+.pillars svg{width:26px;height:26px;color:var(--orange)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:3px solid var(--ink)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{padding:22px 22px 8px 0;display:grid;gap:8px;align-content:start}
+.step b{font:900 italic 52px/1 var(--f-display);color:var(--orange)}
+.step h3{font-size:21px}
+.step p{margin:0;color:var(--muted);font-size:15px}
+
+/* testimonials */
+.reviews{background:var(--surface);border-block:1px solid var(--line)}
+.rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:960px){.rv-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.rv-grid{grid-template-columns:1fr}}
+.rv{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:24px;display:grid;grid-template-rows:auto 1fr auto;gap:16px;margin:0;min-width:0}
+.stars{color:var(--star);letter-spacing:3px;font-size:18px;line-height:1}
+.rv blockquote{margin:0;font-size:15.5px;line-height:1.65}
+.rv figcaption{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;padding-top:16px;border-top:1px solid var(--line)}
+.avatar{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--on-navy);display:grid;place-items:center;font:800 italic 15px/1 var(--f-display)}
+.rv strong{display:block;font-size:15px}
+.rv small{display:block;color:var(--muted);font-size:13px;line-height:1.4}
+.rv-cta{background:var(--navy);color:var(--on-navy);border-color:var(--navy);align-content:center;grid-template-rows:auto;gap:14px}
+.rv-cta h3{font-size:26px}
+.rv-cta p{margin:0;color:var(--on-navy-muted)}
+
+/* commitment */
+.commit .wrap{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+.commit .bar{width:10px;align-self:stretch;background:var(--orange);transform:skewX(-12deg)}
+.commit blockquote{margin:0;font:800 italic clamp(26px,3.6vw,42px)/1.15 var(--f-display);text-transform:uppercase;text-wrap:balance}
+.commit p{color:var(--muted);max-width:62ch;margin:18px 0 0}
+
+/* cta */
+.cta{background:var(--navy);color:var(--on-navy);position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;left:0;top:0;width:34%;height:10px;background:var(--orange);clip-path:polygon(0 0,100% 0,96% 100%,0 100%)}
+.cta .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+@media (max-width:860px){.cta .wrap{grid-template-columns:1fr}}
+.cta h2{font-size:clamp(38px,6vw,72px)}
+.cta h2 em{font-style:italic;color:var(--orange)}
+.cta p{color:var(--on-navy-muted);max-width:46ch}
+.phone{display:grid;gap:14px;background:var(--navy-2);padding:24px;border-radius:6px}
+.phone .label{font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--on-navy-muted)}
+.phone .numtxt{font:900 italic 36px/1 var(--f-display);user-select:all}
+.phone .row{display:flex;flex-wrap:wrap;gap:10px}
+.copy{background:transparent;color:var(--on-navy);border:1.5px solid var(--on-navy-muted);border-radius:999px;padding:10px 16px;font:500 13px/1 var(--f-body);cursor:pointer}
+footer{background:var(--navy);color:var(--on-navy-muted);border-top:1px solid var(--navy-2)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:22px 90px;font-size:13px}
+
+/* floating */
+.float{position:fixed;z-index:30;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.float .pulse{position:absolute;inset:0;border-radius:999px;animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,176,98,.55)}70%{box-shadow:0 0 0 16px rgba(37,176,98,0)}100%{box-shadow:0 0 0 0 rgba(37,176,98,0)}}
+@media (prefers-reduced-motion:reduce){.float .pulse{animation:none}.svc:hover figure img,.work:hover img{transform:none}}
+@media (max-width:520px){.float .lbl{display:none}.float{padding:16px}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="QH SERVIS S.A.C., inicio">
+      <img src="img/logo.png" alt="" width="52" height="49">
+      <div><div class="name">QH SERVIS <span>S.A.C.</span></div><small>Ingeniería metalmecánica</small></div>
+    </a>
+    <nav class="navlinks" aria-label="Secciones">
+      <a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#equipo">Equipo</a><a href="#clientes">Clientes</a>
+    </nav>
+    <a class="btn btn-wa btn-sm wa" data-msg="Hola QH SERVIS, quiero solicitar una cotización." href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Cotizar</a>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero on-navy" style="padding:0">
+  <canvas id="sparks" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Ingeniería, fabricación y proyectos metalmecánicos</span>
+      <h1>Solidez en cada estructura. <em>Precisión en cada proyecto.</em></h1>
+      <p class="lead">Estructuras metálicas, fabricación, soldadura, montaje e instalación para proyectos residenciales, comerciales, industriales y deportivos.</p>
+      <div class="ctas">
+        <a class="btn btn-wa wa" data-msg="Hola QH SERVIS, quiero cotizar un proyecto." href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Cotiza por WhatsApp</a>
+        <a class="btn btn-line" href="#proyectos">Ver proyectos</a>
+      </div>
+      <div class="sectors" aria-label="Sectores que atendemos"><span>Residencial</span><span>Comercial</span><span>Industrial</span><span>Deportivo</span></div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/cancha.webp" alt="Estructura metálica techada para cancha de fútbol" width="714" height="540">
+      <div class="badge">Techado de canchas deportivas</div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Nuestros servicios</span><h2>Soluciones en acero de principio a fin</h2></div>
+      <p>Diseñamos, fabricamos en taller e instalamos en obra. Elige lo que necesitas y te respondemos por WhatsApp con una propuesta.</p>
+    </div>
+    <div class="services" id="services"></div>
+  </div>
+</section>
+
+<section id="puertas" class="door-sec">
+  <div class="wrap door-grid">
+    <div class="door-copy">
+      <span class="eyebrow">Puertas de acero · Acabado imitación madera</span>
+      <h2>Parece madera. Es acero.</h2>
+      <p>Mueve el control y mira la diferencia. Nuestras puertas tienen la seguridad del metal y la elegancia de la madera, para casas, oficinas y negocios.</p>
+      <ol>
+        <li><span><strong>Estructura</strong> de acero cortada, soldada y ensamblada en taller.</span></li>
+        <li><span><strong>Protección</strong> anticorrosiva antes del acabado.</span></li>
+        <li><span><strong>Acabado tipo madera</strong> con vetas y tono a elección.</span></li>
+        <li><span><strong>Instalación</strong> y ajuste final en tu obra.</span></li>
+      </ol>
+      <a class="btn btn-wa wa" data-msg="Hola QH SERVIS, me interesa una puerta metálica con acabado tipo madera." href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Quiero una puerta así</a>
+    </div>
+    <div class="door-stage">
+      <div class="door" id="door" role="img" aria-label="Puerta de acero que cambia a acabado madera">
+        <div class="layer raw"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="layer wood"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="seam"></div>
+        <div class="handle"></div>
+      </div>
+      <input class="range" id="doorRange" type="range" min="0" max="100" value="55" aria-label="Comparar acabado madera y acero">
+      <div class="door-labels"><span>← Acabado madera</span><span>Acero →</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Proyectos realizados</span><h2>Trabajos que hablan por nosotros</h2></div>
+      <p>Toca cualquier proyecto para pedir uno similar. Te escribimos con medidas, materiales y plazo.</p>
+    </div>
+    <div class="port" id="port"></div>
+  </div>
+</section>
+
+<section id="equipo" class="team on-navy">
+  <div class="wrap team-grid">
+    <div class="team-photo"><img src="img/equipo.webp" alt="Equipo de QH SERVIS con cascos y uniformes en el taller" width="1500" height="590" loading="lazy"></div>
+    <div>
+      <span class="eyebrow">Un equipo profesional</span>
+      <h2>A tu <em>servicio</em></h2>
+      <p>Experiencia técnica, precisión en la fabricación y atención personalizada en cada etapa del proyecto.</p>
+      <ul class="pillars">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M6 18a6 6 0 0 1 12 0M12 6v6M9 7.5 12 6l3 1.5"/></svg>Ingeniería y diseño</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20h18M7 20l6-10M13 10l3-6M15 13l3-1M16 16l3 1M14 16l1 3"/></svg>Fabricación y soldadura</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v5M9 8h6M4 14h16v4H4zM8 8l-4 6M16 8l4 6"/></svg>Montaje e instalación</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Control de calidad</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19a6 6 0 0 1 12 0M14 19a4 4 0 0 1 7 0"/></svg>Personal especializado</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Cómo trabajamos</span><h2>De la idea a la instalación</h2></div>
+      <p>Un solo equipo se encarga de todo, así sabes con quién hablar en cada etapa.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>Contacto y visita</h3><p>Nos escribes por WhatsApp y coordinamos la visita para tomar medidas.</p></div>
+      <div class="step"><b>2</b><h3>Diseño y cotización</h3><p>Te enviamos la propuesta con materiales, plazo y precio.</p></div>
+      <div class="step"><b>3</b><h3>Fabricación</h3><p>Cortamos, soldamos y ensamblamos en taller con control de calidad.</p></div>
+      <div class="step"><b>4</b><h3>Montaje y entrega</h3><p>Instalamos en tu obra y entregamos el trabajo terminado.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="clientes" class="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Lo que dicen nuestros clientes</span><h2>Clientes que confían en nosotros</h2></div>
+      <p>Empresas constructoras, complejos deportivos, industrias y negocios que ya trabajaron con QH SERVIS.</p>
+    </div>
+    <div class="rv-grid" id="reviews"></div>
+  </div>
+</section>
+
+<section class="commit">
+  <div class="wrap">
+    <div class="bar" aria-hidden="true"></div>
+    <div>
+      <span class="eyebrow">Nuestro compromiso</span>
+      <blockquote style="margin-top:12px">Transformamos el acero en soluciones funcionales, resistentes y modernas.</blockquote>
+      <p>En QH SERVIS S.A.C. combinamos experiencia técnica, precisión en la fabricación y atención personalizada para desarrollar proyectos adaptados a las necesidades de cada cliente.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta on-navy">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Cotización por WhatsApp</span>
+      <h2 style="margin:12px 0 16px">Cuéntanos tu <em>proyecto</em></h2>
+      <p>Envíanos una foto del lugar y las medidas aproximadas. Te respondemos con una propuesta.</p>
+    </div>
+    <div class="phone">
+      <span class="label">WhatsApp directo</span>
+      <span class="numtxt" id="numtxt">+51 955 241 533</span>
+      <div class="row">
+        <a class="btn btn-wa wa" data-msg="Hola QH SERVIS, quiero cotizar un proyecto." href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Abrir WhatsApp</a>
+        <button class="copy" id="copyBtn" type="button">Copiar número</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 QH SERVIS S.A.C. · Ingeniería metalmecánica</span><span>Solidez en cada estructura. Precisión en cada proyecto.</span></div></footer>
+
+<a class="btn btn-wa float wa" data-msg="Hola QH SERVIS, quiero información sobre sus servicios." href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><span class="pulse" aria-hidden="true"></span><svg class="ico"><use href="#i-wa"/></svg><span class="lbl">WhatsApp</span></a>
+
+<script>
+(function(){
+  var NUM="51955241533";
+  function wa(msg){return "https://wa.me/"+NUM+"?text="+encodeURIComponent(msg)}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+  var SERVICES=[
+    {t:"Estructuras metálicas",img:"img/mezzanine.webp",alt:"Mezzanine metálico con barandas amarillas",d:"Fabricación y montaje de estructuras de acero para obras de todo tamaño.",
+     it:["Cerchas, vigas, columnas y soportes","Galpones, almacenes y naves industriales","Entrepisos y mezzanines metálicos","Ampliaciones y reforzamientos estructurales"]},
+    {t:"Techos y coberturas",img:"img/cancha.webp",alt:"Techo metálico sobre cancha de fútbol",d:"Techados para canchas, patios, terrazas, estacionamientos y almacenes.",
+     it:["Techado de canchas deportivas","Coberturas para patios y estacionamientos","Instalación de planchas metálicas","Mantenimiento y reparación de coberturas"]},
+    {t:"Puertas y portones",img:"img/puerta.webp",alt:"Puerta de acero con acabado tipo madera",d:"Puertas modernas y de seguridad, incluidas las de acero con acabado madera.",
+     it:["Puertas de acero imitación madera","Portones corredizos y batientes","Rejas, barandas y cerramientos","Diseños metálicos personalizados"]},
+    {t:"Mobiliario metálico",img:"img/cocina.webp",alt:"Repisas de cocina de metal y madera con iluminación",d:"Muebles a medida con estructura de acero y acabados tipo madera.",
+     it:["Repisas de cocina metal + madera","Estanterías de estilo industrial","Mesas, escritorios y soportes","Mobiliario para hogar, oficina y negocio"]},
+    {t:"Soldadura especializada",svg:true,d:"Soldadura y fabricación de piezas para obras e industria.",
+     it:["Soldadura para proyectos industriales","Piezas y componentes metálicos","Corte, armado y ensamblaje","Reparación de elementos metálicos"]},
+    {t:"Montaje industrial",img:"img/escalera.webp",alt:"Escalera metálica industrial con barandas de seguridad",d:"Instalación, montaje y mantenimiento de estructuras para empresas.",
+     it:["Montaje de componentes prefabricados","Plataformas, escaleras y accesos","Estructuras de soporte para equipos","Mantenimiento preventivo y correctivo"]}
+  ];
+  var WELD='<svg viewBox="0 0 320 200" aria-label="Ilustración de soldadura"><rect width="320" height="200" fill="var(--navy)"/><rect y="146" width="320" height="18" fill="var(--navy-2)"/><rect x="40" y="128" width="120" height="18" fill="var(--metal)"/><rect x="160" y="128" width="120" height="18" fill="var(--metal-2)"/><path d="M116 128h44" stroke="var(--orange)" stroke-width="5" stroke-linecap="round"/><g id="weldSparks"></g><circle cx="160" cy="126" r="18" fill="#F7A54A" opacity=".35"/><circle cx="160" cy="126" r="6" fill="#FFF3D6"/><path d="M160 124 214 56l18 10-48 64" fill="var(--navy-2)"/></svg>';
+  var sv=document.getElementById("services");
+  sv.innerHTML=SERVICES.map(function(s,i){
+    var media=s.svg?WELD:'<img src="'+s.img+'" alt="'+esc(s.alt)+'" loading="lazy">';
+    return '<article class="svc"><figure>'+media+'<span class="num">0'+(i+1)+'</span></figure><div class="body"><h3>'+s.t+'</h3><p>'+s.d+'</p><ul>'+s.it.map(function(x){return "<li>"+x+"</li>"}).join("")+'</ul><a class="btn btn-wa btn-sm wa" data-msg="Hola QH SERVIS, quiero cotizar: '+esc(s.t)+'." href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Cotizar este servicio</a></div></article>';
+  }).join("");
+
+  var WORKS=[
+    {c:"w1",img:"img/mezzanine.webp",t:"Mezzanine metálico",m:["Plataforma de almacenamiento","Pisco, Ica","Sector industrial","2026"]},
+    {c:"w2",img:"img/cancha.webp",t:"Techado de cancha deportiva",m:["Estructura con cerchas","Cobertura metálica"]},
+    {c:"w3",img:"img/puerta.webp",t:"Puerta de acero estilo madera",m:["Residencial","Acabado imitación madera"]},
+    {c:"w4",img:"img/cocina.webp",t:"Repisas de cocina industriales",m:["Metal + madera","Diseño a medida"]},
+    {c:"w5",img:"img/escalera.webp",t:"Escalera y barandas industriales",m:["Accesos a plataforma","Barandas de seguridad"]}
+  ];
+  document.getElementById("port").innerHTML=WORKS.map(function(w){
+    return '<a class="work '+w.c+' wa" data-msg="Hola QH SERVIS, vi su proyecto «'+esc(w.t)+'» y quiero algo similar." href="#" target="_blank" rel="noopener"><img src="'+w.img+'" alt="'+esc(w.t)+'" loading="lazy"><span class="go"><svg class="ico" style="width:15px;height:15px"><use href="#i-wa"/></svg>Quiero uno similar</span><span class="cap"><b>'+w.t+'</b><span class="meta">'+w.m.map(function(x){return "<span>"+x+"</span>"}).join("")+'</span></span></a>';
+  }).join("");
+
+  var REVIEWS=[
+    {n:"Carlos Mendoza Rojas",r:"Gerente de Operaciones",e:"Constructora Andina del Sur S.A.C.",q:"Contratamos a QH SERVIS para la fabricación y montaje de estructuras metálicas en uno de nuestros proyectos. Nos gustó la responsabilidad del equipo, la comunicación durante todo el proceso y los acabados del trabajo. Sin duda, los consideraríamos nuevamente para futuros proyectos."},
+    {n:"Ricardo Salazar Torres",r:"Administrador General",e:"Complejo Deportivo Los Campeones",q:"Necesitábamos instalar una cobertura metálica para nuestra cancha deportiva. QH SERVIS nos presentó una solución que se adaptaba a nuestras necesidades. Quedamos muy conformes con la estructura, los acabados y la atención recibida. Una buena experiencia de principio a fin."},
+    {n:"Miguel Ángel Fernández",r:"Jefe de Mantenimiento",e:"Industrias del Pacífico S.A.C.",q:"Solicitamos trabajos de soldadura y fabricación de componentes metálicos para nuestras instalaciones. El personal demostró conocimiento técnico y buena disposición para resolver los detalles que surgieron. Valoramos especialmente el orden y la calidad del trabajo entregado."},
+    {n:"Patricia Ramírez Castro",r:"Gerente Administrativa",e:"Inversiones Santa Lucía S.A.C.",q:"Encargamos puertas metálicas con acabado tipo madera para nuestras oficinas. Buscábamos un diseño moderno, elegante y resistente. El resultado nos encantó, especialmente por los detalles y la apariencia del acabado. Muy buena atención y disposición del equipo."},
+    {n:"Jorge Luis Paredes",r:"Jefe de Logística",e:"Distribuidora San Martín S.A.C.",q:"Trabajamos con QH SERVIS en la fabricación de una plataforma metálica para optimizar el almacenamiento de nuestros productos. El equipo comprendió nuestras necesidades y desarrolló una solución práctica. Quedamos satisfechos con el resultado y la atención durante el proyecto."}
+  ];
+  function ini(n){var p=n.split(" ");return (p[0][0]+(p[1]?p[1][0]:"")).toUpperCase()}
+  document.getElementById("reviews").innerHTML=REVIEWS.map(function(v){
+    return '<figure class="rv"><div class="stars" role="img" aria-label="5 de 5 estrellas">★★★★★</div><blockquote>“'+v.q+'”</blockquote><figcaption><span class="avatar" aria-hidden="true">'+ini(v.n)+'</span><span><strong>'+v.n+'</strong><small>'+v.r+' · '+v.e+'</small></span></figcaption></figure>';
+  }).join("")+'<div class="rv rv-cta"><h3>¿El próximo proyecto es el tuyo?</h3><p>Escríbenos y te ayudamos a definir la mejor solución.</p><a class="btn btn-wa wa" data-msg="Hola QH SERVIS, quiero cotizar un proyecto." href="#" target="_blank" rel="noopener" style="justify-self:start"><svg class="ico"><use href="#i-wa"/></svg>Hablar por WhatsApp</a></div>';
+
+  document.querySelectorAll(".wa").forEach(function(a){a.href=wa(a.getAttribute("data-msg")||"Hola QH SERVIS")});
+
+  var cb=document.getElementById("copyBtn");
+  cb.addEventListener("click",function(){
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById("numtxt"));var s=getSelection();s.removeAllRanges();s.addRange(r);cb.textContent="Número seleccionado"}
+    try{navigator.clipboard.writeText("+51 955 241 533").then(function(){cb.textContent="Número copiado"},sel)}catch(e){sel()}
+  });
+
+  var door=document.getElementById("door"),rg=document.getElementById("doorRange");
+  rg.addEventListener("input",function(){door.style.setProperty("--p",rg.value+"%")});
+
+  var ws=document.getElementById("weldSparks"),NS="http://www.w3.org/2000/svg";
+  for(var i=0;i<26;i++){var a=-Math.PI*Math.random(),l=20+Math.random()*70,p=document.createElementNS(NS,"path");
+    p.setAttribute("d","M160 126l"+(Math.cos(a)*l).toFixed(1)+" "+(Math.sin(a)*l*.8).toFixed(1));p.setAttribute("stroke",i%3?"#F7A54A":"#FFF3D6");p.setAttribute("stroke-width","1.4");p.setAttribute("stroke-linecap","round");p.setAttribute("opacity",(.4+Math.random()*.6).toFixed(2));ws.appendChild(p)}
+
+  var cv=document.getElementById("sparks"),cx=cv.getContext("2d"),W,H,dpr=Math.min(2,window.devicePixelRatio||1),P=[];
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function size(){var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+  function origin(){return W<860?{x:W*.5,y:Math.min(240,H)*.92}:{x:W*.53,y:H*.88}}
+  function spawn(n){var o=origin();for(var i=0;i<n;i++){var a=-Math.PI*Math.random(),v=1.5+Math.random()*5;P.push({x:o.x,y:o.y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1,l:30+Math.random()*50,a:0})}}
+  function frame(){
+    cx.globalCompositeOperation="destination-out";cx.fillStyle="rgba(0,0,0,.25)";cx.fillRect(0,0,W,H);cx.globalCompositeOperation="lighter";
+    for(var i=P.length-1;i>=0;i--){var p=P[i],px=p.x,py=p.y;p.vy+=.13;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.a++;
+      var t=1-p.a/p.l;if(t<=0||p.y>H){P.splice(i,1);continue}
+      cx.strokeStyle="rgba(255,"+(140+Math.round(100*t))+","+Math.round(60*t)+","+t+")";cx.lineWidth=1.5*t+.4;cx.beginPath();cx.moveTo(px,py);cx.lineTo(p.x,p.y);cx.stroke()}
+    cx.globalCompositeOperation="source-over";
+  }
+  var vis=true;
+  if("IntersectionObserver" in window){new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(cv)}
+  function loop(){if(vis){spawn(Math.random()<.9?3:14);frame()}requestAnimationFrame(loop)}
+  size();addEventListener("resize",size);
+  if(!reduce)loop();
+})();
+</script>
+
+</body>
+</html>
