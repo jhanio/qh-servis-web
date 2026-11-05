@@ -124,16 +124,15 @@ section{padding-block:84px}
 .door-copy li{display:grid;grid-template-columns:34px 1fr;gap:10px;counter-increment:s}
 .door-copy li::before{content:counter(s);font:900 italic 22px/1.1 var(--f-display);color:var(--orange)}
 .door-stage{display:grid;gap:14px;justify-items:center}
-.door{--p:55%;position:relative;width:min(100%,330px);aspect-ratio:9/16;border:10px solid var(--navy);border-bottom-width:6px;border-radius:3px;background:var(--navy)}
-.door .layer{position:absolute;inset:0;display:grid;grid-template-rows:repeat(6,1fr);gap:4%;padding:7% 8%}
-.door .raw{background:linear-gradient(100deg,var(--metal) 0%,var(--metal-2) 40%,var(--metal) 60%,var(--metal-2) 100%)}
-.door .raw i{background:linear-gradient(170deg,var(--metal-2),var(--metal));box-shadow:inset 0 -2px 0 rgba(0,0,0,.2)}
-.door .wood{clip-path:inset(0 calc(100% - var(--p)) 0 0);background:#1a1a1a}
-.door .wood i{background:repeating-linear-gradient(2deg,var(--wood) 0 6px,var(--wood-2) 6px 9px,var(--wood) 9px 17px,var(--wood-3) 17px 18px,var(--wood-2) 18px 26px)}
-.door .seam{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1px;background:var(--orange);box-shadow:0 0 18px 4px rgba(238,116,25,.7)}
-.door .handle{position:absolute;right:12%;top:30%;width:4%;height:38%;border-radius:3px;background:linear-gradient(90deg,#9aa3ab,#e6eaee,#9aa3ab)}
-.door-labels{width:min(100%,330px);display:flex;justify-content:space-between;color:var(--muted);font:500 12px/1 var(--f-mono)}
-.range{width:min(100%,330px);accent-color:var(--orange)}
+.door{--p:0%;position:relative;width:min(100%,320px);aspect-ratio:600/1110;border-radius:4px;overflow:hidden;box-shadow:0 18px 40px rgba(10,20,40,.28);background:var(--navy)}
+.door img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.door .wood{clip-path:inset(0 0 0 var(--p))}
+.door .seam{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1px;background:var(--orange);box-shadow:0 0 18px 4px rgba(238,116,25,.7);transition:opacity .2s}
+.door[data-full] .seam{opacity:0}
+.door .chip{position:absolute;top:12px;font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:7px 9px;border-radius:3px;background:rgba(10,20,40,.72);color:#EEF2F8;transition:opacity .2s}
+.door .chip.l{left:12px}.door .chip.r{right:12px}
+.door-labels{width:min(100%,320px);display:flex;justify-content:space-between;color:var(--muted);font:500 12px/1 var(--f-mono)}
+.range{width:min(100%,320px);accent-color:var(--orange)}
 
 /* portfolio */
 .port{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
@@ -285,14 +284,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
       <a class="btn btn-wa wa" data-msg="Hola QH SERVIS, me interesa una puerta metálica con acabado tipo madera." href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Quiero una puerta así</a>
     </div>
     <div class="door-stage">
-      <div class="door" id="door" role="img" aria-label="Puerta de acero que cambia a acabado madera">
-        <div class="layer raw"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="layer wood"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="door" id="door" data-full role="img" aria-label="Puerta de acero con acabado madera; al deslizar se ve el acero original">
+        <img src="img/puerta-acero.webp" alt="" width="600" height="1110" loading="lazy">
+        <img class="wood" src="img/puerta-madera.webp" alt="" width="600" height="1110" loading="lazy">
         <div class="seam"></div>
-        <div class="handle"></div>
+        <span class="chip l" id="chipS" style="opacity:0">Acero</span>
+        <span class="chip r" id="chipW">Acabado madera</span>
       </div>
-      <input class="range" id="doorRange" type="range" min="0" max="100" value="55" aria-label="Comparar acabado madera y acero">
-      <div class="door-labels"><span>← Acabado madera</span><span>Acero →</span></div>
+      <input class="range" id="doorRange" type="range" min="0" max="100" value="0" aria-label="Deslizar para ver el acero bajo el acabado madera">
+      <div class="door-labels"><span>Madera</span><span>Desliza → para ver el acero</span></div>
     </div>
   </div>
 </section>
@@ -399,15 +399,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
      it:["Puertas de acero imitación madera","Portones corredizos y batientes","Rejas, barandas y cerramientos","Diseños metálicos personalizados"]},
     {t:"Mobiliario metálico",img:"img/cocina.webp",alt:"Repisas de cocina de metal y madera con iluminación",d:"Muebles a medida con estructura de acero y acabados tipo madera.",
      it:["Repisas de cocina metal + madera","Estanterías de estilo industrial","Mesas, escritorios y soportes","Mobiliario para hogar, oficina y negocio"]},
-    {t:"Soldadura especializada",svg:true,d:"Soldadura y fabricación de piezas para obras e industria.",
-     it:["Soldadura para proyectos industriales","Piezas y componentes metálicos","Corte, armado y ensamblaje","Reparación de elementos metálicos"]},
+    {t:"Soldadura especializada",img:"img/soldadura.webp",alt:"Soldador trabajando con soldadura MIG y chispas",d:"Soldadura y fabricación de piezas para obras e industria.",
+     it:["Soldadura MIG / MAG y TIG","Soldadura para proyectos industriales","Piezas y componentes metálicos","Corte, armado y ensamblaje","Reparación de elementos metálicos"]},
     {t:"Montaje industrial",img:"img/escalera.webp",alt:"Escalera metálica industrial con barandas de seguridad",d:"Instalación, montaje y mantenimiento de estructuras para empresas.",
      it:["Montaje de componentes prefabricados","Plataformas, escaleras y accesos","Estructuras de soporte para equipos","Mantenimiento preventivo y correctivo"]}
   ];
-  var WELD='<svg viewBox="0 0 320 200" aria-label="Ilustración de soldadura"><rect width="320" height="200" fill="var(--navy)"/><rect y="146" width="320" height="18" fill="var(--navy-2)"/><rect x="40" y="128" width="120" height="18" fill="var(--metal)"/><rect x="160" y="128" width="120" height="18" fill="var(--metal-2)"/><path d="M116 128h44" stroke="var(--orange)" stroke-width="5" stroke-linecap="round"/><g id="weldSparks"></g><circle cx="160" cy="126" r="18" fill="#F7A54A" opacity=".35"/><circle cx="160" cy="126" r="6" fill="#FFF3D6"/><path d="M160 124 214 56l18 10-48 64" fill="var(--navy-2)"/></svg>';
   var sv=document.getElementById("services");
   sv.innerHTML=SERVICES.map(function(s,i){
-    var media=s.svg?WELD:'<img src="'+s.img+'" alt="'+esc(s.alt)+'" loading="lazy">';
+    var media='<img src="'+s.img+'" alt="'+esc(s.alt)+'" loading="lazy">';
     return '<article class="svc"><figure>'+media+'<span class="num">0'+(i+1)+'</span></figure><div class="body"><h3>'+s.t+'</h3><p>'+s.d+'</p><ul>'+s.it.map(function(x){return "<li>"+x+"</li>"}).join("")+'</ul><a class="btn btn-wa btn-sm wa" data-msg="Hola QH SERVIS, quiero cotizar: '+esc(s.t)+'." href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Cotizar este servicio</a></div></article>';
   }).join("");
 
@@ -443,11 +442,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
   });
 
   var door=document.getElementById("door"),rg=document.getElementById("doorRange");
-  rg.addEventListener("input",function(){door.style.setProperty("--p",rg.value+"%")});
-
-  var ws=document.getElementById("weldSparks"),NS="http://www.w3.org/2000/svg";
-  for(var i=0;i<26;i++){var a=-Math.PI*Math.random(),l=20+Math.random()*70,p=document.createElementNS(NS,"path");
-    p.setAttribute("d","M160 126l"+(Math.cos(a)*l).toFixed(1)+" "+(Math.sin(a)*l*.8).toFixed(1));p.setAttribute("stroke",i%3?"#F7A54A":"#FFF3D6");p.setAttribute("stroke-width","1.4");p.setAttribute("stroke-linecap","round");p.setAttribute("opacity",(.4+Math.random()*.6).toFixed(2));ws.appendChild(p)}
+  var cw=document.getElementById("chipW"),cs=document.getElementById("chipS");
+  function setDoor(v){door.style.setProperty("--p",v+"%");if(v<=0)door.setAttribute("data-full","");else door.removeAttribute("data-full");cw.style.opacity=v<88?1:0;cs.style.opacity=v>12?1:0}
+  rg.addEventListener("input",function(){setDoor(+rg.value)});
 
   var cv=document.getElementById("sparks"),cx=cv.getContext("2d"),W,H,dpr=Math.min(2,window.devicePixelRatio||1),P=[];
   var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
